@@ -2,9 +2,13 @@ package pl.kzochowski.tiktokcrawler.service;
 
 import pl.kzochowski.tiktokcrawler.model.Profile;
 
+import java.util.List;
+
 public interface ProfileService {
 
     Profile addProfile(String profilePageUrl);
+
+    List<Profile> getAllProfiles();
 
     class ProfilePageDoesNotExistException extends RuntimeException{
         public ProfilePageDoesNotExistException(String profilePageUrl){

@@ -1,15 +1,12 @@
 package pl.kzochowski.tiktokcrawler.web;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.kzochowski.tiktokcrawler.model.PageUrl;
 import pl.kzochowski.tiktokcrawler.model.Profile;
 import pl.kzochowski.tiktokcrawler.service.ProfileService;
+
+import java.util.List;
 
 @RestController
 public class ProfileController {
@@ -24,6 +21,12 @@ public class ProfileController {
     @ResponseStatus(HttpStatus.CREATED)
     Profile addProfile(@RequestBody PageUrl pageUrl){
         return profileService.addProfile(pageUrl.getPageUrl());
+    }
+
+    @GetMapping("/profile")
+    @ResponseStatus(HttpStatus.OK)
+    List<Profile> allProfiles(){
+       return profileService.getAllProfiles();
     }
 
 }

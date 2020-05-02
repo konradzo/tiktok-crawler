@@ -7,6 +7,8 @@ import pl.kzochowski.tiktokcrawler.repository.ProfileRepository;
 import pl.kzochowski.tiktokcrawler.service.ProfileDataFetcher;
 import pl.kzochowski.tiktokcrawler.service.ProfileService;
 
+import java.util.List;
+
 @Service
 public class ProfileServiceImpl implements ProfileService {
 
@@ -23,6 +25,11 @@ public class ProfileServiceImpl implements ProfileService {
         Profile newProfile = new Profile();
         JsonNode profileNode = profileDataFetcher.getProfileJsonInfo(profilePageUrl);
         return newProfile;
+    }
+
+    @Override
+    public List<Profile> getAllProfiles() {
+        return repository.findAll();
     }
 
 }
