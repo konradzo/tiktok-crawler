@@ -1,5 +1,6 @@
 package pl.kzochowski.tiktokcrawler.service.impl;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.stereotype.Service;
 import pl.kzochowski.tiktokcrawler.model.Profile;
 import pl.kzochowski.tiktokcrawler.repository.ProfileRepository;
@@ -20,7 +21,7 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public Profile addProfile(String profilePageUrl) {
         Profile newProfile = new Profile();
-        String webPage = profileDataFetcher.fetchProfileJsonInfo(profilePageUrl);
+        JsonNode profileNode = profileDataFetcher.getProfileJsonInfo(profilePageUrl);
         return newProfile;
     }
 

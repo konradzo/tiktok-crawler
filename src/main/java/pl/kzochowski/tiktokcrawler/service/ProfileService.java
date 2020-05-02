@@ -24,4 +24,10 @@ public interface ProfileService {
         }
     }
 
+    class ProfileJsonProcessingException extends RuntimeException{
+        public ProfileJsonProcessingException(String profilePageUrl){
+            super(String.format("Profile json processing exception. Page url: %s", profilePageUrl));
+        }
+    }
+
 }

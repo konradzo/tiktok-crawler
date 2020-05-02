@@ -17,4 +17,11 @@ public class TiktokAdvice {
         return exception.getMessage();
     }
 
+    @ResponseBody
+    @ExceptionHandler(ProfileService.ProfileJsonProcessingException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    String profileJsonProcessingHandler(ProfileService.ProfileJsonProcessingException exception){
+        return exception.getMessage();
+    }
+
 }
