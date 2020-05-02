@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import pl.kzochowski.tiktokcrawler.model.PageUrl;
 import pl.kzochowski.tiktokcrawler.model.Profile;
 import pl.kzochowski.tiktokcrawler.service.ProfileService;
 
@@ -22,13 +23,7 @@ public class ProfileController {
     @PostMapping("/profile")
     @ResponseStatus(HttpStatus.CREATED)
     Profile addProfile(@RequestBody PageUrl pageUrl){
-        return profileService.addProfile(pageUrl.pageUrl);
-    }
-
-    @Setter
-    @Getter
-    static class PageUrl{
-        private String pageUrl;
+        return profileService.addProfile(pageUrl.getPageUrl());
     }
 
 }
