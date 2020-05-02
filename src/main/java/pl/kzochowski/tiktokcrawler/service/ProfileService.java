@@ -1,18 +1,25 @@
 package pl.kzochowski.tiktokcrawler.service;
 
+import pl.kzochowski.tiktokcrawler.model.Profile;
+
 public interface ProfileService {
 
-    void addProfile(String profilePageUrl);
+    Profile addProfile(String profilePageUrl);
 
+    class ProfilePageDoesNotExistException extends RuntimeException{
+        public ProfilePageDoesNotExistException(String profilePageUrl){
+            super(String.format("Profile page with url %s does not exist", profilePageUrl));
+        }
+    }
 
     class ProfileAlreadyExistsException extends RuntimeException {
-        ProfileAlreadyExistsException(String profilePageUrl) {
+        public ProfileAlreadyExistsException(String profilePageUrl) {
             super(String.format("Profile with page url %s already added", profilePageUrl));
         }
     }
 
     class ProfileDoesNotExistException extends RuntimeException {
-        ProfileDoesNotExistException(String profilePageUrl) {
+        public ProfileDoesNotExistException(String profilePageUrl) {
             super(String.format("Profile with page url %s does not exist", profilePageUrl));
         }
     }
