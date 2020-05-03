@@ -38,4 +38,11 @@ public class TiktokAdvice {
         return exception.getMessage();
     }
 
+    @ResponseBody
+    @ExceptionHandler(ProfileService.ProfileCreatingException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    String profileCreatingExceptionHandler(ProfileService.ProfileCreatingException exception){
+        return exception.getMessage();
+    }
+
 }

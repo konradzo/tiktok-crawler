@@ -26,8 +26,8 @@ public class ProfileServiceImpl implements ProfileService {
         Optional<Profile> temp = repository.findByProfilePageUrl(profilePageUrl);
         if (temp.isPresent())
             throw new ProfileAlreadyAddedException(profilePageUrl);
-        Profile newProfile = new Profile();
         JsonNode profileNode = profileDataFetcher.getProfileJsonInfo(profilePageUrl);
+        Profile newProfile = createNewProfile(profilePageUrl, profileNode);
         return newProfile;
     }
 
@@ -40,6 +40,23 @@ public class ProfileServiceImpl implements ProfileService {
     public Profile getProfileByUniqueId(String uniqueId) {
         return Optional.ofNullable(repository.findByUniqueId(uniqueId))
                 .orElseThrow(() -> new DatabaseDoesNotContainProfile(uniqueId));
+    }
+
+    private Profile createNewProfile(String profilePageUrl, JsonNode node) {
+        try {
+            JsonNode mainInfoNode = node.path("props").path("pageProps").path("userData");
+            String userId = mainInfoNode.path("userId").asText();
+            String nickname = mainInfoNode.path("nickname").asText();
+            String uniqueId = mainInfoNode.path("uniqueId").asText();
+            return Profile.builder()
+                    .userId(userId)
+                    .nickname(nickname)
+                    .profilePageUrl(profilePageUrl)
+                    .uniqueId(uniqueId)
+                    .build();
+        } catch (Exception e) {
+            throw new ProfileCreatingException(profilePageUrl);
+        }
     }
 
 }

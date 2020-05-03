@@ -31,7 +31,7 @@ public class ProfileController {
 
     @GetMapping("/profiles/{uniqueId}")
     @ResponseStatus(HttpStatus.OK)
-    Profile getProfileByName(@PathVariable("uniqueId") String uniqueId){
+    Profile getProfileByUniqueId(@PathVariable("uniqueId") String uniqueId){
         return profileService.getProfileByUniqueId(uniqueId);
     }
 

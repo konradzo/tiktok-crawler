@@ -44,4 +44,10 @@ public interface ProfileService {
         }
     }
 
+    class ProfileCreatingException extends RuntimeException{
+        public ProfileCreatingException(String profilePageUrl){
+            super(String.format("Creating profile exception. Page url: %s", profilePageUrl));
+        }
+    }
+
 }
