@@ -24,4 +24,11 @@ public class TiktokAdvice {
         return exception.getMessage();
     }
 
+    @ResponseBody
+    @ExceptionHandler(ProfileService.DatabaseDoesNotContainProfile.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    String databaseNotContainsProfileHandler(ProfileService.DatabaseDoesNotContainProfile exception){
+        return exception.getMessage();
+    }
+
 }
