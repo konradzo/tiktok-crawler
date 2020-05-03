@@ -28,7 +28,7 @@ public class ProfileServiceImpl implements ProfileService {
             throw new ProfileAlreadyAddedException(profilePageUrl);
         JsonNode profileNode = profileDataFetcher.getProfileJsonInfo(profilePageUrl);
         Profile newProfile = createNewProfile(profilePageUrl, profileNode);
-        return newProfile;
+        return repository.save(newProfile);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public Profile getProfileByUniqueId(String uniqueId) {
         return Optional.ofNullable(repository.findByUniqueId(uniqueId))
-                .orElseThrow(() -> new DatabaseDoesNotContainProfile(uniqueId));
+                .orElseThrow(() -> new DatabaseDoesNotContainProfileException(uniqueId));
     }
 
     private Profile createNewProfile(String profilePageUrl, JsonNode node) {

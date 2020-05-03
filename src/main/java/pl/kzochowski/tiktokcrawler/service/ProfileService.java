@@ -38,8 +38,8 @@ public interface ProfileService {
         }
     }
 
-    class DatabaseDoesNotContainProfile extends RuntimeException {
-        public DatabaseDoesNotContainProfile(String uniqueId){
+    class DatabaseDoesNotContainProfileException extends RuntimeException {
+        public DatabaseDoesNotContainProfileException(String uniqueId){
             super(String.format("Database does not contain profile with unique id: %s", uniqueId));
         }
     }

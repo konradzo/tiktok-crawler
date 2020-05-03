@@ -7,9 +7,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import pl.kzochowski.tiktokcrawler.service.ProfileService.*;
 
-
 @ControllerAdvice
-public class TiktokAdvice {
+public class ControllerExceptionHandler {
 
     @ResponseBody
     @ExceptionHandler(ProfilePageDoesNotExistException.class)
@@ -26,9 +25,9 @@ public class TiktokAdvice {
     }
 
     @ResponseBody
-    @ExceptionHandler(DatabaseDoesNotContainProfile.class)
+    @ExceptionHandler(DatabaseDoesNotContainProfileException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String databaseNotContainsProfileHandler(DatabaseDoesNotContainProfile exception){
+    String databaseNotContainsProfileHandler(DatabaseDoesNotContainProfileException exception){
         return exception.getMessage();
     }
 
