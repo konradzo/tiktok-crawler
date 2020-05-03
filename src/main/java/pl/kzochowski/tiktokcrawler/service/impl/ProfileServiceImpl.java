@@ -8,6 +8,7 @@ import pl.kzochowski.tiktokcrawler.service.ProfileDataFetcher;
 import pl.kzochowski.tiktokcrawler.service.ProfileService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProfileServiceImpl implements ProfileService {
@@ -30,6 +31,12 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public List<Profile> getAllProfiles() {
         return repository.findAll();
+    }
+
+    @Override
+    public Profile getProfileByUniqueId(String uniqueId) {
+        return Optional.ofNullable(repository.findByUniqueId(uniqueId))
+                .orElseThrow(() -> new DatabaseDoesNotContainProfile(uniqueId));
     }
 
 }

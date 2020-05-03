@@ -17,16 +17,22 @@ public class ProfileController {
         this.profileService = profileService;
     }
 
-    @PostMapping("/profile")
+    @PostMapping("/profiles")
     @ResponseStatus(HttpStatus.CREATED)
     Profile addProfile(@RequestBody PageUrl pageUrl){
         return profileService.addProfile(pageUrl.getPageUrl());
     }
 
-    @GetMapping("/profile")
+    @GetMapping("/profiles")
     @ResponseStatus(HttpStatus.OK)
     List<Profile> allProfiles(){
        return profileService.getAllProfiles();
+    }
+
+    @GetMapping("/profiles/{uniqueId}")
+    @ResponseStatus(HttpStatus.OK)
+    Profile getProfileByName(@PathVariable("uniqueId") String uniqueId){
+        return profileService.getProfileByUniqueId(uniqueId);
     }
 
 }
