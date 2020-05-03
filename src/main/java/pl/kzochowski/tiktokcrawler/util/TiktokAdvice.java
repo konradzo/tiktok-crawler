@@ -31,4 +31,11 @@ public class TiktokAdvice {
         return exception.getMessage();
     }
 
+    @ResponseBody
+    @ExceptionHandler(ProfileService.ProfileAlreadyAddedException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    String profileAlreadyAddedHandler(ProfileService.ProfileAlreadyAddedException exception){
+        return exception.getMessage();
+    }
+
 }

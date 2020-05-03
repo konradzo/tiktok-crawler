@@ -23,6 +23,9 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public Profile addProfile(String profilePageUrl) {
+        Optional<Profile> temp = repository.findByProfilePageUrl(profilePageUrl);
+        if (temp.isPresent())
+            throw new ProfileAlreadyAddedException(profilePageUrl);
         Profile newProfile = new Profile();
         JsonNode profileNode = profileDataFetcher.getProfileJsonInfo(profilePageUrl);
         return newProfile;

@@ -20,8 +20,8 @@ public interface ProfileService {
         }
     }
 
-    class ProfileAlreadyExistsException extends RuntimeException {
-        public ProfileAlreadyExistsException(String profilePageUrl) {
+    class ProfileAlreadyAddedException extends RuntimeException {
+        public ProfileAlreadyAddedException(String profilePageUrl) {
             super(String.format("Profile with page url %s already added", profilePageUrl));
         }
     }

@@ -11,4 +11,6 @@ public interface ProfileRepository extends JpaRepository<Profile, Integer> {
 
     Profile findByUniqueId(String uniqueId);
 
+    Optional<Profile> findByProfilePageUrl(String profilePageUrl);
+
 }
