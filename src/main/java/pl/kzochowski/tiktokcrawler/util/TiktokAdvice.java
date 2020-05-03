@@ -5,43 +5,44 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import pl.kzochowski.tiktokcrawler.service.ProfileService;
+import pl.kzochowski.tiktokcrawler.service.ProfileService.*;
+
 
 @ControllerAdvice
 public class TiktokAdvice {
 
     @ResponseBody
-    @ExceptionHandler(ProfileService.ProfilePageDoesNotExistException.class)
+    @ExceptionHandler(ProfilePageDoesNotExistException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String profileNotFoundHandler(ProfileService.ProfilePageDoesNotExistException exception){
+    String profileNotFoundHandler(ProfilePageDoesNotExistException exception){
         return exception.getMessage();
     }
 
     @ResponseBody
-    @ExceptionHandler(ProfileService.ProfileJsonProcessingException.class)
+    @ExceptionHandler(ProfileJsonProcessingException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    String profileJsonProcessingHandler(ProfileService.ProfileJsonProcessingException exception){
+    String profileJsonProcessingHandler(ProfileJsonProcessingException exception){
         return exception.getMessage();
     }
 
     @ResponseBody
-    @ExceptionHandler(ProfileService.DatabaseDoesNotContainProfile.class)
+    @ExceptionHandler(DatabaseDoesNotContainProfile.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String databaseNotContainsProfileHandler(ProfileService.DatabaseDoesNotContainProfile exception){
+    String databaseNotContainsProfileHandler(DatabaseDoesNotContainProfile exception){
         return exception.getMessage();
     }
 
     @ResponseBody
-    @ExceptionHandler(ProfileService.ProfileAlreadyAddedException.class)
+    @ExceptionHandler(ProfileAlreadyAddedException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
-    String profileAlreadyAddedHandler(ProfileService.ProfileAlreadyAddedException exception){
+    String profileAlreadyAddedHandler(ProfileAlreadyAddedException exception){
         return exception.getMessage();
     }
 
     @ResponseBody
-    @ExceptionHandler(ProfileService.ProfileCreatingException.class)
+    @ExceptionHandler(ProfileCreatingException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    String profileCreatingExceptionHandler(ProfileService.ProfileCreatingException exception){
+    String profileCreatingExceptionHandler(ProfileCreatingException exception){
         return exception.getMessage();
     }
 
