@@ -22,7 +22,7 @@ public class ProfileController {
     @PostMapping("/profiles")
     @ResponseStatus(HttpStatus.CREATED)
     Profile addProfile(@RequestBody PageUrl pageUrl) {
-        if (Objects.isNull(pageUrl))
+        if (Objects.isNull(pageUrl.getPageUrl()))
             throw new BadRequestException();
         return profileService.addProfile(pageUrl.getPageUrl());
     }
