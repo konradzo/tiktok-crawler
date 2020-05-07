@@ -5,13 +5,15 @@ import org.springframework.web.bind.annotation.*;
 import pl.kzochowski.tiktokcrawler.model.PageUrl;
 import pl.kzochowski.tiktokcrawler.model.Profile;
 import pl.kzochowski.tiktokcrawler.service.ProfileService;
+import pl.kzochowski.tiktokcrawler.service.ProfileService.BadRequestException;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 public class ProfileController {
 
-   private final ProfileService profileService;
+    private final ProfileService profileService;
 
     public ProfileController(ProfileService profileService) {
         this.profileService = profileService;
@@ -19,19 +21,21 @@ public class ProfileController {
 
     @PostMapping("/profiles")
     @ResponseStatus(HttpStatus.CREATED)
-    Profile addProfile(@RequestBody PageUrl pageUrl){
+    Profile addProfile(@RequestBody PageUrl pageUrl) {
+        if (Objects.isNull(pageUrl))
+            throw new BadRequestException();
         return profileService.addProfile(pageUrl.getPageUrl());
     }
 
     @GetMapping("/profiles")
     @ResponseStatus(HttpStatus.OK)
-    List<Profile> allProfiles(){
-       return profileService.getAllProfiles();
+    List<Profile> allProfiles() {
+        return profileService.getAllProfiles();
     }
 
     @GetMapping("/profiles/{uniqueId}")
     @ResponseStatus(HttpStatus.OK)
-    Profile getProfileByUniqueId(@PathVariable("uniqueId") String uniqueId){
+    Profile getProfileByUniqueId(@PathVariable("uniqueId") String uniqueId) {
         return profileService.getProfileByUniqueId(uniqueId);
     }
 

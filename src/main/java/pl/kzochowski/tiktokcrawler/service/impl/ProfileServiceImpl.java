@@ -6,6 +6,8 @@ import pl.kzochowski.tiktokcrawler.model.Profile;
 import pl.kzochowski.tiktokcrawler.repository.ProfileRepository;
 import pl.kzochowski.tiktokcrawler.service.ProfileDataFetcher;
 import pl.kzochowski.tiktokcrawler.service.ProfileService;
+import pl.kzochowski.tiktokcrawler.util.ControllerExceptionHandler;
+import pl.kzochowski.tiktokcrawler.util.ControllerExceptionHandler.*;
 
 import java.util.List;
 import java.util.Optional;

@@ -14,6 +14,12 @@ public interface ProfileService {
 
     Profile getProfileByUniqueId(String profileName);
 
+    class BadRequestException extends RuntimeException{
+        public BadRequestException(){
+            super("Bad request. Body is null!");
+        }
+    }
+
     class ProfilePageDoesNotExistException extends RuntimeException{
         public ProfilePageDoesNotExistException(String profilePageUrl){
             super(String.format("Profile page with url %s does not exist", profilePageUrl));

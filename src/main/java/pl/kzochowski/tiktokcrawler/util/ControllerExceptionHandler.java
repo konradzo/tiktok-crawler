@@ -11,6 +11,13 @@ import pl.kzochowski.tiktokcrawler.service.ProfileService.*;
 public class ControllerExceptionHandler {
 
     @ResponseBody
+    @ExceptionHandler(BadRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    String badRequestHandler(BadRequestException exception){
+        return exception.getMessage();
+    }
+
+    @ResponseBody
     @ExceptionHandler(ProfilePageDoesNotExistException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     String profileNotFoundHandler(ProfilePageDoesNotExistException exception){

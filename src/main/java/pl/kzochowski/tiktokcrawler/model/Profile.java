@@ -28,7 +28,6 @@ public class Profile {
     private String uniqueId;
     @NonNull
     private String profilePageUrl;
-    @NonNull
     private LocalDateTime lastExecution;
 
 }
