@@ -44,6 +44,12 @@ public class ProfileServiceImpl implements ProfileService {
                 .orElseThrow(() -> new DatabaseDoesNotContainProfileException(uniqueId));
     }
 
+    @Override
+    public Optional<Profile> fetchProfileToCrawl() {
+        //todo implement
+        return null;
+    }
+
     private Profile createNewProfile(String profilePageUrl, JsonNode node) {
         try {
             JsonNode mainInfoNode = node.path("props").path("pageProps").path("userData");
