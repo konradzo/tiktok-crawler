@@ -30,6 +30,7 @@ public class PageSource implements MessageSource {
         }
 
         PagePostsDto dto = new PagePostsDto(profile.get().getProfilePageUrl());
+        log.info("Crawling page: {}", dto.getPageUrl());
         return MessageBuilder.withPayload(dto).build();
     }
 
