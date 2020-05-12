@@ -8,7 +8,8 @@ spring:
       ddl-auto: none
 
 webdriver:
-  chrome: driver/chromedriver
+  chrome:
+    driver: driver/chromedriver
 
 user-agent:
   normal: Mozilla /5.0 (Compatible MSIE 9.0;Windows NT 6.1;WOW64; Trident/5.0)
