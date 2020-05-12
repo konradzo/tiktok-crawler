@@ -19,7 +19,7 @@ public class PostHandler implements GenericHandler<PagePostsDto> {
 
     @Override
     public Object handle(PagePostsDto pagePostsDto, MessageHeaders messageHeaders) {
-
+        //todo fetching posts
         return null;
     }
 
