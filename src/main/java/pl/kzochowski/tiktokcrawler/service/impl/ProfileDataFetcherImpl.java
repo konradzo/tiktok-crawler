@@ -27,6 +27,8 @@ import java.util.List;
 @Service
 public class ProfileDataFetcherImpl implements PageDataFetcher {
 
+    private static final String jsonStart = "<script id=\"__NEXT_DATA__\" type=\"application/json\" crossorigin=\"anonymous\">";
+    private static final String jsonEnd = "</script><script async=\"\" data-next-page=\"/share/video\" ";
     private final RestTemplate restTemplate;
     private final ObjectMapper mapper;
 
@@ -60,10 +62,9 @@ public class ProfileDataFetcherImpl implements PageDataFetcher {
     @Override
     public Post fetchVideoData(String videoUrl) {
         //todo change to make all list at once
-        String jsonStart = "<script id=\"__NEXT_DATA__\" type=\"application/json\" crossorigin=\"anonymous\">";
-        String jsonEnd = "</script><script async=\"\" data-next-page=\"/share/video\" ";
         ResponseEntity<String> response = restTemplate.exchange(URI.create(videoUrl), HttpMethod.GET, buildHeader(), String.class);
         String body = response.getBody();
+        //todo ??
         String postJson = Arrays.asList(body.split(jsonStart + "|\\" + jsonEnd)).get(1);
         try {
             JsonNode mainPostNode = mapper.readTree(postJson);
