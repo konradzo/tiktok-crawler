@@ -5,7 +5,10 @@ import org.springframework.integration.handler.GenericHandler;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.stereotype.Component;
 import pl.kzochowski.tiktokcrawler.model.PagePostsDto;
+import pl.kzochowski.tiktokcrawler.model.Post;
 import pl.kzochowski.tiktokcrawler.service.PostService;
+
+import java.util.List;
 
 @Slf4j
 @Component
@@ -19,8 +22,10 @@ public class PostHandler implements GenericHandler<PagePostsDto> {
 
     @Override
     public Object handle(PagePostsDto pagePostsDto, MessageHeaders messageHeaders) {
-        //todo fetching posts
-        return null;
+        List<Post> posts = postService.fetchPosts(pagePostsDto.getPageUrl());
+        pagePostsDto.setPostList(posts);
+        log.info("Number of fetched posts: {}", posts.size());
+        return pagePostsDto;
     }
 
 }

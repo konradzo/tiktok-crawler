@@ -10,6 +10,7 @@ import org.springframework.integration.dsl.PollerSpec;
 import pl.kzochowski.tiktokcrawler.integration.channel.ElasticChannel;
 import pl.kzochowski.tiktokcrawler.integration.handler.PostHandler;
 import pl.kzochowski.tiktokcrawler.integration.source.PageSource;
+import pl.kzochowski.tiktokcrawler.integration.transform.PostTransformer;
 
 import java.util.concurrent.TimeUnit;
 
@@ -26,12 +27,14 @@ public class TiktokCrawlerApplication {
     public IntegrationFlow fetchingPostsFlow(@Value("${crawl.delay: 10}") int delayInSeconds,
                                              PageSource source,
                                              PostHandler postHandler,
+                                             PostTransformer postTransformer,
                                              ElasticChannel elasticChannel) {
         return IntegrationFlows.from(source, e -> e.poller(p -> {
             PollerSpec pollerSpec = p.fixedDelay(delayInSeconds, TimeUnit.SECONDS);
             return pollerSpec;
         }))
                 .handle(postHandler)
+                .transform(postTransformer)
                 .channel(elasticChannel)
                 .get();
     }
