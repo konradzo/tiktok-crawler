@@ -10,16 +10,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-import pl.kzochowski.tiktokcrawler.service.ProfileDataFetcher;
+import pl.kzochowski.tiktokcrawler.model.Post;
+import pl.kzochowski.tiktokcrawler.service.PageDataFetcher;
 
 import pl.kzochowski.tiktokcrawler.service.ProfileService.ProfilePageDoesNotExistException;
 import pl.kzochowski.tiktokcrawler.service.ProfileService.ProfileJsonProcessingException;
 
 import java.net.URI;
 import java.util.Arrays;
+import java.util.List;
 
 @Service
-public class ProfileDataFetcherImpl implements ProfileDataFetcher {
+public class ProfileDataFetcherImpl implements PageDataFetcher {
 
     private final RestTemplate restTemplate;
     private final ObjectMapper mapper;
@@ -42,6 +44,16 @@ public class ProfileDataFetcherImpl implements ProfileDataFetcher {
         } catch (JsonProcessingException e) {
             throw new ProfileJsonProcessingException(profilePageUrl);
         }
+    }
+
+    @Override
+    public List<String> fetchVideoUrlList(String loadedPageHtml) {
+        return null;
+    }
+
+    @Override
+    public Post fetchVideoData(String videoUrl) {
+        return null;
     }
 
     private JsonNode fetchJson(String pageContent) throws JsonProcessingException {

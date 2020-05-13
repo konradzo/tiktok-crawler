@@ -4,10 +4,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.stereotype.Service;
 import pl.kzochowski.tiktokcrawler.model.Profile;
 import pl.kzochowski.tiktokcrawler.repository.ProfileRepository;
-import pl.kzochowski.tiktokcrawler.service.ProfileDataFetcher;
+import pl.kzochowski.tiktokcrawler.service.PageDataFetcher;
 import pl.kzochowski.tiktokcrawler.service.ProfileService;
-import pl.kzochowski.tiktokcrawler.util.ControllerExceptionHandler;
-import pl.kzochowski.tiktokcrawler.util.ControllerExceptionHandler.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,9 +14,9 @@ import java.util.Optional;
 public class ProfileServiceImpl implements ProfileService {
 
     private final ProfileRepository repository;
-    private final ProfileDataFetcher profileDataFetcher;
+    private final PageDataFetcher profileDataFetcher;
 
-    public ProfileServiceImpl(ProfileRepository repository, ProfileDataFetcher profileDataFetcher) {
+    public ProfileServiceImpl(ProfileRepository repository, PageDataFetcher profileDataFetcher) {
         this.repository = repository;
         this.profileDataFetcher = profileDataFetcher;
     }
