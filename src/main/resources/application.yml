@@ -11,6 +11,9 @@ webdriver:
   chrome:
     driver: driver/chromedriver
 
+crawl:
+  delay: 10
+
 user-agent:
   normal: Mozilla /5.0 (Compatible MSIE 9.0;Windows NT 6.1;WOW64; Trident/5.0)
   toRenderPage: Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)

@@ -22,7 +22,6 @@ public class TiktokCrawlerApplication {
     @Bean
     public IntegrationFlow fetchingPostsFlow(@Value("${crawl.delay: 10}") int delayInSeconds,
                                              PageSource source) {
-
         return IntegrationFlows.from(source, e -> e.poller(p -> {
             PollerSpec pollerSpec = p.fixedDelay(delayInSeconds, TimeUnit.SECONDS);
             return pollerSpec;
