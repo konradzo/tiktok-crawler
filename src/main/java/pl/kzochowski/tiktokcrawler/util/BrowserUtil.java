@@ -3,9 +3,9 @@ package pl.kzochowski.tiktokcrawler.util;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class BrowserUtil {
 
     private final String chromeDriverPath;
