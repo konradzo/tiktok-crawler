@@ -16,14 +16,14 @@ public interface ProfileService {
 
     Optional<Profile> fetchProfileToCrawl();
 
-    class BadRequestException extends RuntimeException{
-        public BadRequestException(){
+    class BadRequestException extends RuntimeException {
+        public BadRequestException() {
             super("Bad request. Body is null!");
         }
     }
 
-    class ProfilePageDoesNotExistException extends RuntimeException{
-        public ProfilePageDoesNotExistException(String profilePageUrl){
+    class ProfilePageDoesNotExistException extends RuntimeException {
+        public ProfilePageDoesNotExistException(String profilePageUrl) {
             super(String.format("Profile page with url %s does not exist", profilePageUrl));
         }
     }
@@ -40,20 +40,20 @@ public interface ProfileService {
         }
     }
 
-    class ProfileJsonProcessingException extends RuntimeException{
-        public ProfileJsonProcessingException(String profilePageUrl){
+    class ProfileJsonProcessingException extends RuntimeException {
+        public ProfileJsonProcessingException(String profilePageUrl) {
             super(String.format("Profile json processing exception. Page url: %s", profilePageUrl));
         }
     }
 
     class DatabaseDoesNotContainProfileException extends RuntimeException {
-        public DatabaseDoesNotContainProfileException(String uniqueId){
+        public DatabaseDoesNotContainProfileException(String uniqueId) {
             super(String.format("Database does not contain profile with unique id: %s", uniqueId));
         }
     }
 
-    class ProfileCreatingException extends RuntimeException{
-        public ProfileCreatingException(String profilePageUrl){
+    class ProfileCreatingException extends RuntimeException {
+        public ProfileCreatingException(String profilePageUrl) {
             super(String.format("Creating profile exception. Page url: %s", profilePageUrl));
         }
     }

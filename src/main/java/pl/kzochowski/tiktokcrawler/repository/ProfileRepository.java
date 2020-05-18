@@ -13,4 +13,6 @@ public interface ProfileRepository extends JpaRepository<Profile, Integer> {
 
     Optional<Profile> findByProfilePageUrl(String profilePageUrl);
 
+    Optional<Profile> findFirstByOrderByLastExecutionAsc();
+
 }

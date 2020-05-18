@@ -44,8 +44,7 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public Optional<Profile> fetchProfileToCrawl() {
-        //todo implement
-        return null;
+        return repository.findFirstByOrderByLastExecutionAsc();
     }
 
     private Profile createNewProfile(String profilePageUrl, JsonNode node) {
