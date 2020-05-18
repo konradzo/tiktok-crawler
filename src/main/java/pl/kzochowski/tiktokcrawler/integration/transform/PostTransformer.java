@@ -12,6 +12,8 @@ import java.util.List;
 @Component
 public class PostTransformer extends AbstractPayloadTransformer<PagePostsDto, List<Document>> {
 
+
+
     @Override
     protected List<Document> transformPayload(PagePostsDto pagePostsDto) {
 
