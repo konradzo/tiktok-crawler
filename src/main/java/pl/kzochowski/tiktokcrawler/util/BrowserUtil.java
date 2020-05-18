@@ -21,7 +21,7 @@ public class BrowserUtil {
 
     public ChromeDriver getChromeDriverInstance() {
         //todo add to configuration class, remove this property
-        System.setProperty("webdrviver.chrome.driver", chromeDriverPath);
+        System.setProperty("webdriver.chrome.driver", chromeDriverPath);
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--no-sandbox");
         options.addArguments("--no-zygote");

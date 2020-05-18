@@ -9,7 +9,7 @@ public interface PageDataFetcher {
 
     JsonNode getProfileJsonInfo(String profilePageUrl);
 
-    List<String> fetchVideoUrlList(String loadedPageHtml);
+    List<String> fetchVideoUrlList(String pageUrl, String loadedPageHtml);
 
     Post fetchVideoData(String videoUrl);
 

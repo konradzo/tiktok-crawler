@@ -21,8 +21,11 @@ import java.net.URI;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class ProfileDataFetcherImpl implements PageDataFetcher {
@@ -55,8 +58,15 @@ public class ProfileDataFetcherImpl implements PageDataFetcher {
     }
 
     @Override
-    public List<String> fetchVideoUrlList(String loadedPageHtml) {
-        return null;
+    public List<String> fetchVideoUrlList(String pageUrl, String loadedPageHtml) {
+        List<String> videoUrlList = new ArrayList<>();
+        String basePattern = pageUrl + "/video/";
+        Pattern videoUrlPattern = Pattern.compile(basePattern + "(\\d+)");
+        Matcher videoMatcher = videoUrlPattern.matcher(loadedPageHtml);
+        while (videoMatcher.find()) {
+            videoUrlList.add(videoMatcher.group());
+        }
+        return videoUrlList;
     }
 
     @Override
