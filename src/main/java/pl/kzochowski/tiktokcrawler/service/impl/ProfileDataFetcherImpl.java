@@ -3,6 +3,7 @@ package pl.kzochowski.tiktokcrawler.service.impl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -27,6 +28,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Slf4j
 @Service
 public class ProfileDataFetcherImpl implements PageDataFetcher {
 
@@ -66,6 +68,7 @@ public class ProfileDataFetcherImpl implements PageDataFetcher {
         while (videoMatcher.find()) {
             videoUrlList.add(videoMatcher.group());
         }
+        log.info("Video url list size: {}", videoUrlList.size());
         return videoUrlList;
     }
 
