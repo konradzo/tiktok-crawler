@@ -3,7 +3,7 @@ package pl.kzochowski.tiktokcrawler.integration.transform;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.integration.transformer.AbstractPayloadTransformer;
 import org.springframework.stereotype.Component;
-import pl.kzochowski.tiktokcrawler.model.Document;
+import pl.kzochowski.model.Document;
 import pl.kzochowski.tiktokcrawler.model.PagePostsDto;
 import pl.kzochowski.tiktokcrawler.service.DocumentTransformer;
 
