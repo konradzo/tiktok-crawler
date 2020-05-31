@@ -7,6 +7,7 @@ import pl.kzochowski.tiktokcrawler.repository.ProfileRepository;
 import pl.kzochowski.tiktokcrawler.service.PageDataFetcher;
 import pl.kzochowski.tiktokcrawler.service.ProfileService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,7 +49,12 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public Optional<List<Profile>> fetchProfilesToCrawl() {
-        return repository.findTop5ByOrderByLastExecutionAsc();
+        Optional<List<Profile>> profiles = repository.findTop5ByOrderByLastExecutionAsc();
+        profiles.ifPresent(profileList -> profileList.forEach(profile -> {
+            profile.setLastExecution(LocalDateTime.now());
+            repository.save(profile);
+        }));
+        return profiles;
     }
 
     private Profile createNewProfile(String profilePageUrl, JsonNode node) {
