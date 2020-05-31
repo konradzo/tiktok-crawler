@@ -18,6 +18,7 @@ public class ElasticChannel implements MessageChannel {
 
     @Override
     public boolean send(Message<?> message, long timeout) {
+        //todo elastic connection and suitable mapping
         return false;
     }
 

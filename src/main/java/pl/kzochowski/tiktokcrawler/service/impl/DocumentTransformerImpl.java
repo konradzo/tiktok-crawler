@@ -21,7 +21,7 @@ public class DocumentTransformerImpl implements DocumentTransformer {
     }
 
     @Override
-    public Document translateToDocument(Post post) {
+    public Document translateToDocument(final Post post) {
         String language = languageService.resolveLanguage(post.getMessage());
         return Document.builder()
                 .author(Author

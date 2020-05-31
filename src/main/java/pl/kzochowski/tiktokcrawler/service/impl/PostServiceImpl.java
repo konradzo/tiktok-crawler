@@ -45,7 +45,7 @@ public class PostServiceImpl implements PostService {
             driver.close();
         }
 
-        List<String> videoUrlList = dataFetcher.fetchVideoUrlList(pageUrl,loadedPageHtml);
+        final List<String> videoUrlList = dataFetcher.fetchVideoUrlList(pageUrl,loadedPageHtml);
         return videoUrlList.stream().map(dataFetcher::fetchVideoData).collect(Collectors.toList());
     }
 

@@ -23,7 +23,7 @@ public class PageSource implements MessageSource {
 
     @Override
     public Message<PagePostsDto> receive() {
-        Optional<Profile> profile = profileService.fetchProfileToCrawl();
+        final Optional<Profile> profile = profileService.fetchProfileToCrawl();
         if (!profile.isPresent()) {
             log.info("No profile to crawl!");
             return null;

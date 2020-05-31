@@ -22,7 +22,7 @@ public class PostHandler implements GenericHandler<PagePostsDto> {
 
     @Override
     public Object handle(PagePostsDto pagePostsDto, MessageHeaders messageHeaders) {
-        List<Post> posts = postService.fetchPosts(pagePostsDto.getPageUrl());
+        final List<Post> posts = postService.fetchPosts(pagePostsDto.getPageUrl());
         pagePostsDto.setPostList(posts);
         log.info("Number of fetched posts: {}", posts.size());
         return pagePostsDto;
