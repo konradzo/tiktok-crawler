@@ -68,7 +68,7 @@ public class ProfileDataFetcherImpl implements PageDataFetcher {
         while (videoMatcher.find()) {
             videoUrlList.add(videoMatcher.group());
         }
-        log.info("Video url list size: {}", videoUrlList.size());
+        log.info("Video url list size: {}. Page url: {}", videoUrlList.size(), pageUrl);
         return videoUrlList;
     }
 
@@ -79,6 +79,7 @@ public class ProfileDataFetcherImpl implements PageDataFetcher {
         String body = response.getBody();
         //todo ??
         String postJson = Arrays.asList(body.split(jsonStart + "|\\" + jsonEnd)).get(1);
+        log.info("Fetching metadata from: {}", videoUrl);
         try {
             JsonNode mainPostNode = mapper.readTree(postJson);
             return fillPostObject(videoUrl, mainPostNode);

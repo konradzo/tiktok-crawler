@@ -16,6 +16,8 @@ public interface ProfileService {
 
     Optional<Profile> fetchProfileToCrawl();
 
+    Optional<List<Profile>> fetchProfilesToCrawl();
+
     class BadRequestException extends RuntimeException {
         public BadRequestException() {
             super("Bad request. Body is null!");

@@ -10,11 +10,11 @@ import java.util.List;
 public class PagePostsDto {
 
     //todo refactor
-    private String pageUrl;
+    private final List<Profile> profiles;
     private List<Post> postList;
 
-    public PagePostsDto(String pageUrl) {
-        this.pageUrl = pageUrl;
+    public PagePostsDto(List<Profile> profiles) {
+        this.profiles = profiles;
     }
 
 }

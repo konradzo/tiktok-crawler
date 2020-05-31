@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @Service
 public class ProfileServiceImpl implements ProfileService {
-
     private final ProfileRepository repository;
     private final PageDataFetcher profileDataFetcher;
 
@@ -45,6 +44,11 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public Optional<Profile> fetchProfileToCrawl() {
         return repository.findFirstByOrderByLastExecutionAsc();
+    }
+
+    @Override
+    public Optional<List<Profile>> fetchProfilesToCrawl() {
+        return repository.findTop5ByOrderByLastExecutionAsc();
     }
 
     private Profile createNewProfile(String profilePageUrl, JsonNode node) {

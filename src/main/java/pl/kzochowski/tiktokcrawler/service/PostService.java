@@ -1,12 +1,13 @@
 package pl.kzochowski.tiktokcrawler.service;
 
 import pl.kzochowski.tiktokcrawler.model.Post;
+import pl.kzochowski.tiktokcrawler.model.Profile;
 
 import java.util.List;
 
 public interface PostService {
 
-    List<Post> fetchPosts(String pageUrl);
+    List<Post> fetchPosts(List<Profile> profiles);
 
     class LoadingPageException extends RuntimeException {
         public LoadingPageException(String pageUrl) {

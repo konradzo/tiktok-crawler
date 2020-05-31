@@ -9,12 +9,12 @@ import pl.kzochowski.tiktokcrawler.model.PagePostsDto;
 import pl.kzochowski.tiktokcrawler.model.Profile;
 import pl.kzochowski.tiktokcrawler.service.ProfileService;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
 @Component
 public class PageSource implements MessageSource {
-
     private final ProfileService profileService;
 
     public PageSource(ProfileService profileService) {
@@ -23,15 +23,14 @@ public class PageSource implements MessageSource {
 
     @Override
     public Message<PagePostsDto> receive() {
-        final Optional<Profile> profile = profileService.fetchProfileToCrawl();
-        if (!profile.isPresent()) {
+        final Optional<List<Profile>> profiles = profileService.fetchProfilesToCrawl();
+        if (!profiles.isPresent()) {
             log.info("No profile to crawl!");
             return null;
         }
 
-        PagePostsDto dto = new PagePostsDto(profile.get().getProfilePageUrl());
-        log.info("Crawling page: {}", dto.getPageUrl());
+        PagePostsDto dto = new PagePostsDto(profiles.get());
+        log.info("Crawling profiles list, size {}", dto.getProfiles().size());
         return MessageBuilder.withPayload(dto).build();
     }
-
 }

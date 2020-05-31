@@ -5,10 +5,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.stereotype.Service;
 import pl.kzochowski.tiktokcrawler.model.Post;
+import pl.kzochowski.tiktokcrawler.model.Profile;
 import pl.kzochowski.tiktokcrawler.service.PostService;
 import pl.kzochowski.tiktokcrawler.service.PageDataFetcher;
 import pl.kzochowski.tiktokcrawler.util.BrowserUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,28 +27,42 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> fetchPosts(String pageUrl) {
+    public List<Post> fetchPosts(List<Profile> profiles) {
         ChromeDriver driver = browserUtil.getChromeDriverInstance();
-        WebElement element;
-        String loadedPageHtml = "";
+        List<String> videoUrlList = new ArrayList<>();
+        List<Post> results = new ArrayList<>();
 
         try {
-            driver.get(pageUrl);
-            waitToRenderPage(driver);
+            profiles.forEach(profile -> {
+                String loadedPageHtml = "";
+                try {
+                    waitToRenderPage(driver);
+                    driver.get(profile.getProfilePageUrl());
 
-            element = driver.findElementById("main");
-            loadedPageHtml = element.getAttribute("innerHTML");
-            //todo handle exception
-            if (loadedPageHtml.isEmpty())
-                throw new LoadingPageException(pageUrl);
-        } catch (LoadingPageException e) {
-            e.printStackTrace();
+                    waitToRenderPage(driver);
+
+                    WebElement element = driver.findElementById("main");
+                    loadedPageHtml = element.getAttribute("innerHTML");
+                    if (loadedPageHtml.isEmpty())
+                        throw new LoadingPageException(profile.getProfilePageUrl());
+                    videoUrlList.addAll(dataFetcher.fetchVideoUrlList(profile.getProfilePageUrl(), loadedPageHtml));
+                } catch (LoadingPageException e) {
+                    e.printStackTrace();
+                }
+            });
         } finally {
             driver.close();
         }
 
-        final List<String> videoUrlList = dataFetcher.fetchVideoUrlList(pageUrl,loadedPageHtml);
-        return videoUrlList.stream().map(dataFetcher::fetchVideoData).collect(Collectors.toList());
+        videoUrlList.forEach(videoUrl -> {
+            try {
+                results.add(dataFetcher.fetchVideoData(videoUrl));
+            } catch (Exception e) {
+                log.error("Post processing error. Message: {}", e.getMessage());
+            }
+        });
+
+        return results;
     }
 
     private void waitToRenderPage(ChromeDriver driver) {
