@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 @Slf4j
 @Component
 public class PostTransformer extends AbstractPayloadTransformer<PagePostsDto, List<Document>> {
-
     private final DocumentTransformer documentTransformer;
 
     public PostTransformer(DocumentTransformer documentTransformer) {
@@ -27,5 +26,4 @@ public class PostTransformer extends AbstractPayloadTransformer<PagePostsDto, Li
                 .map(documentTransformer::translateToDocument)
                 .collect(Collectors.toList());
     }
-
 }

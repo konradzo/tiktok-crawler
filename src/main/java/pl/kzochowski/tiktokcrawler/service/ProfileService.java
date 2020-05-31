@@ -7,7 +7,6 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 public interface ProfileService {
-
     Profile addProfile(String profilePageUrl);
 
     List<Profile> getAllProfiles();
@@ -59,5 +58,4 @@ public interface ProfileService {
             super(String.format("Creating profile exception. Page url: %s", profilePageUrl));
         }
     }
-
 }

@@ -6,7 +6,6 @@ import pl.kzochowski.tiktokcrawler.model.Profile;
 import java.util.List;
 
 public interface PostService {
-
     List<Post> fetchPosts(List<Profile> profiles);
 
     class LoadingPageException extends RuntimeException {
@@ -20,5 +19,4 @@ public interface PostService {
             super(String.format("Post processing error. Url: %s", postUrl));
         }
     }
-
 }

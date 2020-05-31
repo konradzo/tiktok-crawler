@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class PostServiceImpl implements PostService {
-
     private final BrowserUtil browserUtil;
     private final PageDataFetcher dataFetcher;
 

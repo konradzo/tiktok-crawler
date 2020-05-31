@@ -9,7 +9,6 @@ import pl.kzochowski.tiktokcrawler.service.SenderService;
 @Slf4j
 @Component
 public class ElasticChannel implements MessageChannel {
-
     private final SenderService senderService;
 
     public ElasticChannel(SenderService senderService) {
@@ -21,5 +20,4 @@ public class ElasticChannel implements MessageChannel {
         //todo elastic connection and suitable mapping
         return false;
     }
-
 }

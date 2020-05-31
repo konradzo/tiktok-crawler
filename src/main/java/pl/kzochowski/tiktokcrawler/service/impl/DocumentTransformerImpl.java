@@ -13,7 +13,6 @@ import java.util.Date;
 @Slf4j
 @Service
 public class DocumentTransformerImpl implements DocumentTransformer {
-
     private final LanguageService languageService;
 
     public DocumentTransformerImpl(LanguageService languageService) {

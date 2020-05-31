@@ -13,7 +13,6 @@ import java.util.List;
 @Slf4j
 @Component
 public class PostHandler implements GenericHandler<PagePostsDto> {
-
     private final PostService postService;
 
     public PostHandler(PostService postService) {
@@ -27,5 +26,4 @@ public class PostHandler implements GenericHandler<PagePostsDto> {
         log.info("Number of fetched posts: {}", posts.size());
         return pagePostsDto;
     }
-
 }

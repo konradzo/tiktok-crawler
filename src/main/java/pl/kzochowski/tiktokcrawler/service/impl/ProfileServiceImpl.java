@@ -57,7 +57,7 @@ public class ProfileServiceImpl implements ProfileService {
         return profiles;
     }
 
-    private Profile createNewProfile(String profilePageUrl, JsonNode node) {
+    private Profile createNewProfile(final String profilePageUrl, JsonNode node) {
         try {
             JsonNode mainInfoNode = node.path("props").path("pageProps").path("userData");
             String userId = mainInfoNode.path("userId").asText();
@@ -73,5 +73,4 @@ public class ProfileServiceImpl implements ProfileService {
             throw new ProfileCreatingException(profilePageUrl);
         }
     }
-
 }
