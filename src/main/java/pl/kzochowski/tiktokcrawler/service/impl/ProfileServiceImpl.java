@@ -43,11 +43,6 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public Optional<Profile> fetchProfileToCrawl() {
-        return repository.findFirstByOrderByLastExecutionAsc();
-    }
-
-    @Override
     public Optional<List<Profile>> fetchProfilesToCrawl() {
         Optional<List<Profile>> profiles = repository.findTop5ByOrderByLastExecutionAsc();
         profiles.ifPresent(profileList -> profileList.forEach(profile -> {

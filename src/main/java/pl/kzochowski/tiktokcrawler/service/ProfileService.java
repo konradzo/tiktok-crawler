@@ -13,8 +13,6 @@ public interface ProfileService {
 
     Profile getProfileByUniqueId(String profileName);
 
-    Optional<Profile> fetchProfileToCrawl();
-
     Optional<List<Profile>> fetchProfilesToCrawl();
 
     class BadRequestException extends RuntimeException {
